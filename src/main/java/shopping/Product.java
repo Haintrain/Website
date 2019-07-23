@@ -17,9 +17,18 @@ public class Product {
     private String productID;
     private String name;
     private String description;
-    private String catergory;
+    private String category;
     private BigDecimal listPrice;
     private BigDecimal quantityInStock;
+
+    public Product(String string, String name1, String cat1, String desc1, BigDecimal bigDecimal, BigDecimal bigDecimal0) {
+        setProductID(string);
+        setName(name1);
+        setCategory(cat1);
+        setDescription(desc1);
+        setListPrice(bigDecimal);
+        setQuantityInStock(bigDecimal0);
+    }
 
     public String getProductID() {
         return productID;
@@ -33,8 +42,8 @@ public class Product {
         return description;
     }
 
-    public String getCatergory() {
-        return catergory;
+    public String getCategory() {
+        return category;
     }
 
     public BigDecimal getListPrice() {
@@ -57,8 +66,8 @@ public class Product {
         this.description = description;
     }
 
-    public void setCatergory(String catergory) {
-        this.catergory = catergory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setListPrice(BigDecimal listPrice) {

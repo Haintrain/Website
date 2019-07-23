@@ -13,7 +13,7 @@ import shopping.Product;
  *
  * @author hansp965
  */
-public class collectionsClass {
+public class CollectionsClass {
     public static Collection<Product> productList = new ArrayList<Product>();
 
     public void addProduct(Product product){
