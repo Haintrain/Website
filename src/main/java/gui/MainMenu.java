@@ -89,7 +89,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
-        ProductEntry entry = new ProductEntry(this, true);
+        ProductEntry entry = new ProductEntry(this, false);
         entry.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_newProductButtonActionPerformed
 
