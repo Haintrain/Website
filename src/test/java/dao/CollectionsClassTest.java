@@ -69,4 +69,8 @@ public class CollectionsClassTest {
         assertFalse("Ensure that the product does not exist", dao.getProductList().contains(prodOne));
     }
     
+    @Test
+    public void testGetCategoryList() {
+        assertTrue("Category List", dao.getCategoryList().contains(prodOne.getCategory()));
+    }
 }

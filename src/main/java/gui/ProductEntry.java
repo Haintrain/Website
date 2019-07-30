@@ -1,7 +1,9 @@
 package gui;
 
 import dao.CollectionsClass;
+import helpers.SimpleListModel;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.swing.JComboBox;
 import shopping.Product;
 
@@ -18,6 +20,7 @@ import shopping.Product;
 public class ProductEntry extends javax.swing.JDialog {
 
     private CollectionsClass dao = new CollectionsClass();
+    SimpleListModel model = new SimpleListModel();
     /**
      * Creates new form ProductEntry
      */
@@ -25,6 +28,10 @@ public class ProductEntry extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         categoryBox.setEditable(true);
+        
+        Collection collection = dao.getCategoryList();
+        model.updateItems(collection);  
+        categoryBox.setModel(model);
     }
 
     /**
