@@ -6,6 +6,7 @@
 package dao;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,22 +41,32 @@ public class CollectionsClassTest {
     
     @After
     public void tearDown() {
-        fail("Not implemented yet");
+        dao.deleteProduct(prodOne);
+        dao.deleteProduct(prodTwo);
+        dao.deleteProduct(prodThree);
     }
 
     @Test
     public void testAddProduct() {
-        fail("Not implemented yet");
+        dao.addProduct(prodThree);
+        assertTrue("Ensure that the product was saved", dao.getProductList().contains(prodThree));
     }
 
     @Test
     public void testGetProductList() {
-        fail("Not implemented yet");
+        Collection<Product> products = dao.getProductList();
+
+        assertTrue("prodOne should exist", products.contains(prodOne));
+        assertTrue("prodTwo should exist", products.contains(prodTwo));
+
+        assertEquals("Only 2 products in result", 2, products.size());
     }
 
     @Test
     public void testRemoveProduct() {
-        fail("Not implemented yet");
+        assertTrue("Ensure that the product does exist", dao.getProductList().contains(prodOne));
+        dao.deleteProduct(prodOne);
+        assertFalse("Ensure that the product does not exist", dao.getProductList().contains(prodOne));
     }
     
 }

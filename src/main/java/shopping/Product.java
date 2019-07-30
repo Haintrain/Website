@@ -21,11 +21,11 @@ public class Product {
     private BigDecimal listPrice;
     private BigDecimal quantityInStock;
 
-    public Product(String string, String name1, String cat1, String desc1, BigDecimal bigDecimal, BigDecimal bigDecimal0) {
+    public Product(String string, String name1, String cat, String desc, BigDecimal bigDecimal, BigDecimal bigDecimal0) {
         setProductID(string);
         setName(name1);
-        setCategory(cat1);
-        setDescription(desc1);
+        setCategory(cat);
+        setDescription(desc);
         setListPrice(bigDecimal);
         setQuantityInStock(bigDecimal0);
     }

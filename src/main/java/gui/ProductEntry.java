@@ -1,5 +1,6 @@
 package gui;
 
+import dao.CollectionsClass;
 import java.math.BigDecimal;
 import javax.swing.JComboBox;
 import shopping.Product;
@@ -16,6 +17,7 @@ import shopping.Product;
  */
 public class ProductEntry extends javax.swing.JDialog {
 
+    private CollectionsClass dao = new CollectionsClass();
     /**
      * Creates new form ProductEntry
      */
@@ -128,11 +130,10 @@ public class ProductEntry extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPanel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(scrollPanel))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +148,7 @@ public class ProductEntry extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(categoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,7 +164,7 @@ public class ProductEntry extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonSave)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -181,18 +182,16 @@ public class ProductEntry extends javax.swing.JDialog {
         String productQuantity = txtQuantity.getText();
         String productDescription = txtDescription.getText();
         
-        Integer quantity = Integer.valueOf(productQuantity);
+        
+        BigDecimal quantity = new BigDecimal(productQuantity);
         BigDecimal price = new BigDecimal(productPrice);
         
-        Product product = new Product();
-        product.setCatergory(productCategory);
-        product.setListPrice(price);
-        product.setDescription(productDescription);
-        product.setName(productName);
-        product.setQuantityInStock(price);
-        product.setProductID(productID);
-   
+        Product product = new Product(productID, productName, productDescription, productCategory, price, quantity);
+        
+        dao.addProduct(product); 
         System.out.println(product.getProductID() + " " + product.getName());
+        
+        dispose();
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

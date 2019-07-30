@@ -24,7 +24,7 @@ public class CollectionsClass {
         return productList;
     }
     
-    public void removeProduct(Product product){
+    public void deleteProduct(Product product){
         productList.remove(product);
     }
 }

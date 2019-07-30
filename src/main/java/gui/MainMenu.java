@@ -44,6 +44,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         viewProductButtons.setText("View Products");
+        viewProductButtons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductButtonsActionPerformed(evt);
+            }
+        });
 
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,8 +95,13 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
         ProductEntry entry = new ProductEntry(this, false);
-        entry.setVisible(true);        // TODO add your handling code here:
+        entry.setVisible(true);        
     }//GEN-LAST:event_newProductButtonActionPerformed
+
+    private void viewProductButtonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonsActionPerformed
+        ViewProducts view = new ViewProducts(this, false);
+        view.setVisible(true);
+    }//GEN-LAST:event_viewProductButtonsActionPerformed
 
     /**
      * @param args the command line arguments
