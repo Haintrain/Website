@@ -5,18 +5,29 @@
  */
 package gui;
 
+import dao.CollectionsClass;
+import helpers.SimpleListModel;
+import java.util.Collection;
+
 /**
  *
  * @author hansp965
  */
 public class ViewProducts extends javax.swing.JDialog {
 
+    private CollectionsClass dao = new CollectionsClass();
+    SimpleListModel model = new SimpleListModel();
     /**
      * Creates new form ViewProducts
      */
     public ViewProducts(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        Collection collection = dao.getProductList();
+        model.updateItems(collection);
+        
+        listProduct.setModel(model);
     }
 
     /**
@@ -29,19 +40,19 @@ public class ViewProducts extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listProduct = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         buttonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        listProduct.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listProduct);
 
         jButton1.setText("Edit");
 
@@ -137,7 +148,7 @@ public class ViewProducts extends javax.swing.JDialog {
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listProduct;
     // End of variables declaration//GEN-END:variables
 }
