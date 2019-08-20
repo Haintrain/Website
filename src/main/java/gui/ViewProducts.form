@@ -30,7 +30,7 @@
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="105" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="104" max="-2" attributes="0"/>
+                      <Component id="buttonDelete" min="-2" pref="104" max="-2" attributes="0"/>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Component id="buttonClose" min="-2" pref="105" max="-2" attributes="0"/>
                   </Group>
@@ -48,7 +48,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonClose" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Product&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -84,10 +84,13 @@
         <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="buttonDelete">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonClose">
       <Properties>
