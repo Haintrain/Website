@@ -48,11 +48,6 @@ public class ViewProducts extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        listProduct.setModel(new javax.swing.AbstractListModel<Product>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listProduct);
 
         jButton1.setText("Edit");
@@ -111,6 +106,11 @@ public class ViewProducts extends javax.swing.JDialog {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         Product prod = listProduct.getSelectedValue();
         dao.deleteProduct(prod);
+        
+        Collection collection = dao.getProductList();
+        model.updateItems(collection);
+       
+        listProduct.setModel(model);
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /**

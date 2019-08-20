@@ -5,8 +5,8 @@
  */
 package dao;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import shopping.Product;
 
 /**
@@ -14,8 +14,8 @@ import shopping.Product;
  * @author hansp965
  */
 public class CollectionsClass {
-    public static Collection<Product> productList = new ArrayList<Product>();
-    public static Collection<String> categoryList = new ArrayList<String>();  
+    public static Collection<Product> productList = new HashSet<Product>();
+    public static Collection<String> categoryList = new HashSet<String>();  
     
     public void addProduct(Product product){
         productList.add(product);
