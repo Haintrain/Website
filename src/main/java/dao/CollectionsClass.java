@@ -6,7 +6,9 @@
 package dao;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import shopping.Product;
 
 /**
@@ -16,9 +18,11 @@ import shopping.Product;
 public class CollectionsClass {
     public static Collection<Product> productList = new HashSet<Product>();
     public static Collection<String> categoryList = new HashSet<String>();  
+    public static Map<String, Product> IDList = new HashMap<>();  
     
     public void addProduct(Product product){
         productList.add(product);
+        IDList.put(product.getProductID(), product);
     }
 
     public Collection<Product> getProductList() {
@@ -27,6 +31,14 @@ public class CollectionsClass {
     
     public void deleteProduct(Product product){
         productList.remove(product);
+    }
+    
+    public Product getProductFromID(String id){
+        if(!IDList.containsKey(id)){
+            return null;
+        }
+        Product product = IDList.get(id);
+        return product;
     }
     
     private void getCategories(){
