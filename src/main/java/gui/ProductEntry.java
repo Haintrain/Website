@@ -94,7 +94,6 @@ public class ProductEntry extends javax.swing.JDialog {
             }
         });
 
-        categoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         categoryBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoryBoxActionPerformed(evt);
@@ -184,7 +183,7 @@ public class ProductEntry extends javax.swing.JDialog {
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         String productID = txtID.getText();
         String productName = txtName.getText();
-        String productCategory = categoryBox.getSelectedItem().toString();
+        String productCategory = (String)categoryBox.getSelectedItem();
         String productPrice = txtPrice.getText();
         String productQuantity = txtQuantity.getText();
         String productDescription = txtDescription.getText();
@@ -196,7 +195,7 @@ public class ProductEntry extends javax.swing.JDialog {
         Product product = new Product(productID, productName, productDescription, productCategory, price, quantity);
         
         dao.addProduct(product); 
-        System.out.println(product.getProductID() + " " + product.getName());
+        System.out.println((String)categoryBox.getSelectedItem());
         
         dispose();
     }//GEN-LAST:event_buttonSaveActionPerformed

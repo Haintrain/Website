@@ -30,6 +30,11 @@ public class ViewProducts extends javax.swing.JDialog {
         model.updateItems(collection);
        
         listProduct.setModel(model);
+  
+        collection = dao.getCategoryList();
+        for(Object c: collection){
+            comboCategory.addItem(c.toString());
+        }
     }
 
     /**
@@ -50,7 +55,7 @@ public class ViewProducts extends javax.swing.JDialog {
         txtSearch = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboCategory = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,7 +94,12 @@ public class ViewProducts extends javax.swing.JDialog {
 
         jLabel2.setText("Category");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        comboCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +127,7 @@ public class ViewProducts extends javax.swing.JDialog {
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonSearch))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,7 +141,7 @@ public class ViewProducts extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,12 +180,33 @@ public class ViewProducts extends javax.swing.JDialog {
             Product product = dao.getProductFromID(txtSearch.getText());
 
             model.updateItems(product);
+            
+            listProduct.setModel(model);
         }
         else{
             collection = dao.getProductList();
             model.updateItems(collection);
+            
+            listProduct.setModel(model);
         }
     }//GEN-LAST:event_buttonSearchActionPerformed
+
+    private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
+        if(!comboCategory.getSelectedItem().equals("All")){
+            String category = comboCategory.getSelectedItem().toString();
+        
+            collection = dao.getProductCategory(category);
+            model.updateItems(collection);
+
+            listProduct.setModel(model);
+        }
+        else{
+            collection = dao.getProductList();
+            model.updateItems(collection);
+            
+            listProduct.setModel(model);
+        }
+    }//GEN-LAST:event_comboCategoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,8 +254,8 @@ public class ViewProducts extends javax.swing.JDialog {
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonSearch;
+    private javax.swing.JComboBox<String> comboCategory;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

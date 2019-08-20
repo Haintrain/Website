@@ -95,7 +95,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
         ProductEntry entry = new ProductEntry(this, false);
-        entry.setVisible(true);        
+        entry.setVisible(true);
     }//GEN-LAST:event_newProductButtonActionPerformed
 
     private void viewProductButtonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonsActionPerformed

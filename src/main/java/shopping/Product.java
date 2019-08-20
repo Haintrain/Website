@@ -21,7 +21,7 @@ public class Product {
     private BigDecimal listPrice;
     private BigDecimal quantityInStock;
 
-    public Product(String string, String name1, String cat, String desc, BigDecimal bigDecimal, BigDecimal bigDecimal0) {
+    public Product(String string, String name1, String desc, String cat, BigDecimal bigDecimal, BigDecimal bigDecimal0) {
         setProductID(string);
         setName(name1);
         setCategory(cat);
@@ -80,6 +80,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return productID + ", " + name;
+        return productID + ", " + name + ", " + category;
     }
 }

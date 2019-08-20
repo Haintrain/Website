@@ -73,4 +73,14 @@ public class CollectionsClassTest {
     public void testGetCategoryList() {
         assertTrue("Category List", dao.getCategoryList().contains(prodOne.getCategory()));
     }
+    
+    @Test
+    public void testGetProductFromID(){
+        assertTrue("Getting product from ID", dao.getProductFromID("1").getName().equals("name1"));
+    }
+    
+    @Test
+    public void testGetProductCategory(){
+        assertTrue("Getting product category list", dao.getProductCategory(prodOne.getCategory()).contains(prodOne));
+    }
 }
