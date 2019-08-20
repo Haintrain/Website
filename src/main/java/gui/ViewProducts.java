@@ -104,13 +104,15 @@ public class ViewProducts extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        Product prod = listProduct.getSelectedValue();
-        dao.deleteProduct(prod);
-        
-        Collection collection = dao.getProductList();
-        model.updateItems(collection);
-       
-        listProduct.setModel(model);
+        if(!listProduct.isSelectionEmpty()){
+            Product prod = listProduct.getSelectedValue();
+            dao.deleteProduct(prod);
+
+            Collection collection = dao.getProductList();
+            model.updateItems(collection);
+
+            listProduct.setModel(model);
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /**
