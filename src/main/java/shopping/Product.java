@@ -16,6 +16,7 @@ import net.sf.oval.constraint.*;
  */
 public class Product {
     @NotNull(message = "ID must be provided.")
+    @NotBlank(message = "ID must be provided.")
     private String productID;
     
     @NotNull(message = "Name must be provided.")
@@ -26,6 +27,7 @@ public class Product {
     private String description;
     
     @NotNull(message = "Category must be provided.")
+    @NotBlank(message = "Category must be provided.")
     private String category;
     
     @NotNull(message = "Price must be provided.")
