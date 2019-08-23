@@ -15,20 +15,18 @@ user -> menu : click 'Add Product'
 
 create "Product Editor" as editor <<dialog>>
 menu -> editor : construct
-user -> editor++ : enter details
+user -> editor++ : selects Category
 editor--
-user -> editor++ : click 'Save'
 
 create "Product DAO" as dao <<dao>>
-editor -> dao : construct
+editor -> dao : gets DAO
 
 create "Product" as product <<product>>
-editor -> product : construct
-editor -> editor : gets details
-editor -> product : addProduct()
+dao -> product : getProductCategory(); 
 
-product -> dao : save product
+dao -> editor : returns Products and Details
 
+user -> editor++ : clicks 'Close'
 editor -> editor : dispose
 destroy editor
 
