@@ -1,6 +1,6 @@
 package gui;
 
-import dao.CollectionsClass;
+import dao.DbConnection;
 import helpers.SimpleListModel;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import shopping.Product;
  */
 public class ProductEntry extends javax.swing.JDialog {
 
-    private CollectionsClass dao = new CollectionsClass();
+    private DbConnection dao = new DbConnection();
     SimpleListModel model = new SimpleListModel();
     /**
      * Creates new form ProductEntry
