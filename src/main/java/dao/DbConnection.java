@@ -75,7 +75,7 @@ public class DbConnection implements DAOInterface {
 
     @Override
     public void deleteProduct(Product product) {
-        String sql = "delete from Product where ProductID=?";
+        String sql = "delete from Product where ProductID = ?";
 
     try (
         Connection dbCon = DbConnection.getConnection(DEFAULT_URI);
@@ -112,14 +112,62 @@ public class DbConnection implements DAOInterface {
     }    }
 
     @Override
-    public Collection<Product> getProductCategory(String category) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Collection<Product> getProductCategory(String c) {
+        String sql = "select * from Product where Category = ?";
+
+    try (
+        Connection connection = DbConnection.getConnection(DEFAULT_URI);
+        PreparedStatement stmt = connection.prepareStatement(sql);
+    ) {
+        stmt.setString(1, c);
+        ResultSet rs = stmt.executeQuery();
+        Collection<Product> products = new ArrayList<>();
+        
+        while (rs.next()) {
+            String productID = rs.getString("ProductID");
+            String name = rs.getString("Name");
+            String description = rs.getString("Description");
+            String category = rs.getString("Category");
+            BigDecimal price = rs.getBigDecimal("ListPrice");
+            BigDecimal quantity = rs.getBigDecimal("QuantityinStock");
+
+            products.add(new Product(productID, name, description, category, price, quantity));
+        }
+        
+        return products;
+
+    } catch (SQLException ex) { 
+        throw new RuntimeException(ex);
+    }    }
 
     @Override
     public Product getProductFromID(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String sql = "select * from Product where ProductID = ?";
+
+    try (
+        Connection connection = DbConnection.getConnection(DEFAULT_URI);
+        PreparedStatement stmt = connection.prepareStatement(sql);
+    ) {
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String productID = rs.getString("ProductID");
+            String name = rs.getString("Name");
+            String description = rs.getString("Description");
+            String category = rs.getString("Category");
+            BigDecimal price = rs.getBigDecimal("ListPrice");
+            BigDecimal quantity = rs.getBigDecimal("QuantityinStock");
+
+            return new Product(productID, name, description, category, price, quantity);
+
+        } else {
+            return null;
+        }
+
+    } catch (SQLException ex) { 
+        throw new RuntimeException(ex);
+    }    }
 
     @Override
     public Collection<Product> getProductList() {
