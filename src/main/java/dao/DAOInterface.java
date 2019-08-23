@@ -12,7 +12,7 @@ import shopping.Product;
  *
  * @author hansp965
  */
-public interface DAOInterface {
+public abstract interface DAOInterface {
 
     void addProduct(Product product);
 
