@@ -75,8 +75,19 @@ public class DbConnection implements DAOInterface {
 
     @Override
     public void deleteProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String sql = "delete from Product where ProductID=?";
+
+    try (
+        Connection dbCon = DbConnection.getConnection(DEFAULT_URI);
+        PreparedStatement stmt = dbCon.prepareStatement(sql);
+    ) {
+        stmt.setString(1, product.getProductID());
+
+        stmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        throw new RuntimeException(ex);
+    }    }
 
     @Override
     public Collection<String> getCategoryList() {
