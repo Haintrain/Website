@@ -43,7 +43,7 @@ public class DbConnection implements DAOInterface {
         try {
             return pool.getConnection();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -69,7 +69,7 @@ public class DbConnection implements DAOInterface {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {  
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -86,7 +86,7 @@ public class DbConnection implements DAOInterface {
         stmt.executeUpdate();
         
     } catch (SQLException ex) {
-        throw new RuntimeException(ex);
+        throw new DAOException(ex.getMessage(), ex);
     }    }
 
     @Override
@@ -108,7 +108,7 @@ public class DbConnection implements DAOInterface {
         return categories;
 
     } catch (SQLException ex) {
-        throw new RuntimeException(ex);
+        throw new DAOException(ex.getMessage(), ex);
     }    }
 
     @Override
@@ -137,7 +137,7 @@ public class DbConnection implements DAOInterface {
         return products;
 
     } catch (SQLException ex) { 
-        throw new RuntimeException(ex);
+        throw new DAOException(ex.getMessage(), ex);
     }    }
 
     @Override
@@ -166,7 +166,7 @@ public class DbConnection implements DAOInterface {
         }
 
     } catch (SQLException ex) { 
-        throw new RuntimeException(ex);
+        throw new DAOException(ex.getMessage(), ex);
     }    }
 
     @Override
@@ -197,6 +197,6 @@ public class DbConnection implements DAOInterface {
         return products;
 
     } catch (SQLException ex) {
-        throw new RuntimeException(ex);
+        throw new DAOException(ex.getMessage(), ex);
     }    }
 }

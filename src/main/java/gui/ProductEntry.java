@@ -1,10 +1,15 @@
 package gui;
 
+import dao.DAOException;
 import dao.DbConnection;
 import helpers.SimpleListModel;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
+import net.sf.oval.exception.ConstraintsViolatedException;
 import shopping.Product;
 
 /*
@@ -12,7 +17,6 @@ import shopping.Product;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author hansp965
@@ -21,6 +25,7 @@ public class ProductEntry extends javax.swing.JDialog {
 
     private DbConnection dao = new DbConnection();
     SimpleListModel model = new SimpleListModel();
+
     /**
      * Creates new form ProductEntry
      */
@@ -28,9 +33,9 @@ public class ProductEntry extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         categoryBox.setEditable(true);
-        
+
         Collection collection = dao.getCategoryList();
-        model.updateItems(collection);  
+        model.updateItems(collection);
         categoryBox.setModel(model);
     }
 
@@ -181,23 +186,42 @@ public class ProductEntry extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-        String productID = txtID.getText();
-        String productName = txtName.getText();
-        String productCategory = (String)categoryBox.getSelectedItem();
-        String productPrice = txtPrice.getText();
-        String productQuantity = txtQuantity.getText();
-        String productDescription = txtDescription.getText();
-        
-        
-        BigDecimal quantity = new BigDecimal(productQuantity);
-        BigDecimal price = new BigDecimal(productPrice);
-        
-        Product product = new Product(productID, productName, productDescription, productCategory, price, quantity);
-        
-        dao.addProduct(product); 
-        System.out.println((String)categoryBox.getSelectedItem());
-        
-        dispose();
+        try {
+            String productID = txtID.getText();
+            String productName = txtName.getText();
+            String productCategory = (String) categoryBox.getSelectedItem();
+            String productPrice = txtPrice.getText();
+            String productQuantity = txtQuantity.getText();
+            String productDescription = txtDescription.getText();
+
+            BigDecimal quantity = new BigDecimal(productQuantity);
+            BigDecimal price = new BigDecimal(productPrice);
+
+            Product product = new Product(productID, productName, productDescription, productCategory, price, quantity);
+
+            new Validator().assertValid(product);
+
+            dao.addProduct(product);
+            System.out.println((String) categoryBox.getSelectedItem());
+
+            dispose();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "You have entered a price or quantity that is not a valid number.",
+                    "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ConstraintsViolatedException ex) {
+            ConstraintViolation[] violations = ex.getConstraintViolations();
+            String msg = "Please fix the following input problems:";
+            for (ConstraintViolation cv : violations) {
+                msg += "\n •" + cv.getMessage();
+            }
+            JOptionPane.showMessageDialog(this, msg, "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException exc){
+            JOptionPane.showMessageDialog(this,
+                    "Error", 
+                    exc.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

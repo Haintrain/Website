@@ -2,6 +2,7 @@ package shopping;
 
 
 import java.math.BigDecimal;
+import net.sf.oval.constraint.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,11 +15,25 @@ import java.math.BigDecimal;
  * @author hansp965
  */
 public class Product {
+    @NotNull(message = "ID must be provided.")
     private String productID;
+    
+    @NotNull(message = "Name must be provided.")
+    @NotBlank(message = "Name must be provided.")
+    @Length(min=2, message="Name must contain at least two characters.")
     private String name;
+    
     private String description;
+    
+    @NotNull(message = "Category must be provided.")
     private String category;
+    
+    @NotNull(message = "Price must be provided.")
+    @NotNegative(message = "Price must be zero or greater.")
     private BigDecimal listPrice;
+    
+    @NotNull(message = "Quantity must be provided.")
+    @NotNegative(message = "Quantity must be zero or greater.")
     private BigDecimal quantityInStock;
 
     public Product(String string, String name1, String desc, String cat, BigDecimal bigDecimal, BigDecimal bigDecimal0) {

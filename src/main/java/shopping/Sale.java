@@ -29,4 +29,46 @@ public class Sale {
     public void addItem(SaleItem saleItem){
         
     }
+
+    public Integer getSaleID() {
+        return saleID;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public ArrayList<SaleItem> getSaleItems() {
+        return saleItems;
+    }
+
+    public void setSaleID(Integer saleID) {
+        this.saleID = saleID;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setSaleItems(ArrayList<SaleItem> saleItems) {
+        this.saleItems = saleItems;
+    }
+    
+    
 }
