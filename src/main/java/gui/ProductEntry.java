@@ -36,7 +36,7 @@ public class ProductEntry extends javax.swing.JDialog {
         
         this.dao = dao;
 
-        Collection collection = dao.getCategoryList();
+        Collection collection = dao.getDAO().getCategoryList();
         model.updateItems(collection);
         categoryBox.setModel(model);
     }
@@ -203,7 +203,7 @@ public class ProductEntry extends javax.swing.JDialog {
 
             new Validator().assertValid(product);
 
-            dao.addProduct(product);
+            dao.getDAO().addProduct(product);
             System.out.println((String) categoryBox.getSelectedItem());
 
             dispose();

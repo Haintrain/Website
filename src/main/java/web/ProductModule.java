@@ -5,7 +5,7 @@
  */
 package web;
 
-import dao.DbConnection;
+import dao.DAO;
 import org.jooby.Jooby;
 
 /**
@@ -14,9 +14,9 @@ import org.jooby.Jooby;
  */
 public class ProductModule extends Jooby {
 
-    private final DbConnection dao;
+    private final DAO dao;
     
-    public ProductModule(DbConnection dao) {
+    public ProductModule(DAO dao) {
         this.dao = dao;
         
         get("/api/products", () -> dao.getProductList());

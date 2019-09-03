@@ -28,12 +28,12 @@ public class ViewProducts extends javax.swing.JDialog {
         
         this.dao = dao;
         
-        collection = dao.getProductList();
+        collection = dao.getDAO().getProductList();
         model.updateItems(collection);
        
         listProduct.setModel(model);
   
-        collection = dao.getCategoryList();
+        collection = dao.getDAO().getCategoryList();
         for(Object c: collection){
             comboCategory.addItem(c.toString());
         }
@@ -164,9 +164,9 @@ public class ViewProducts extends javax.swing.JDialog {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         if(!listProduct.isSelectionEmpty()){
             Product prod = listProduct.getSelectedValue();
-            dao.deleteProduct(prod);
+            dao.getDAO().deleteProduct(prod);
 
-            collection = dao.getProductList();
+            collection = dao.getDAO().getProductList();
             model.updateItems(collection);
 
             listProduct.setModel(model);
@@ -179,14 +179,14 @@ public class ViewProducts extends javax.swing.JDialog {
 
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         if(!txtSearch.getText().isEmpty()){
-            Product product = dao.getProductFromID(txtSearch.getText());
+            Product product = dao.getDAO().getProductFromID(txtSearch.getText());
 
             model.updateItems(product);
             
             listProduct.setModel(model);
         }
         else{
-            collection = dao.getProductList();
+            collection = dao.getDAO().getProductList();
             model.updateItems(collection);
             
             listProduct.setModel(model);
@@ -197,13 +197,13 @@ public class ViewProducts extends javax.swing.JDialog {
         if(!comboCategory.getSelectedItem().equals("All")){
             String category = comboCategory.getSelectedItem().toString();
         
-            collection = dao.getProductCategory(category);
+            collection = dao.getDAO().getProductCategory(category);
             model.updateItems(collection);
 
             listProduct.setModel(model);
         }
         else{
-            collection = dao.getProductList();
+            collection = dao.getDAO().getProductList();
             model.updateItems(collection);
             
             listProduct.setModel(model);

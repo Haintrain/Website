@@ -18,13 +18,13 @@ import org.jooby.json.Gzon;
 public class Server extends Jooby {
 
     private static DbConnection dao = new DbConnection();
-    private static CustomerDAO custDao = new CustomerDAO();
     
     public Server() {
         port(8080);
         use(new Gzon());
-        use(new ProductModule(dao));
-        use(new CustomerModule(custDao));
+        use(new ProductModule(dao.getDAO()));
+        use(new CustomerModule(dao.getCustomerDAO()));
+        use(new AssetModule());
     }
 
     public static void main(String[] args) throws Exception {

@@ -6,7 +6,6 @@
 package web;
 
 import dao.CustomerDAO;
-import dao.DbConnection;
 import org.jooby.Jooby;
 import org.jooby.Status;
 import shopping.Customer;
