@@ -222,8 +222,7 @@ public class ProductEntry extends javax.swing.JDialog {
         } catch (DAOException exc){
             JOptionPane.showMessageDialog(this,
                     "Error", 
-                    exc.getMessage(), JOptionPane.ERROR_MESSAGE);
-        }
+                    exc.getMessage(), JOptionPane.ERROR_MESSAGE);      }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
