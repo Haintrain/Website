@@ -1,5 +1,8 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import shopping.Customer;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,30 +15,31 @@ public final class CustomerDAO implements CustomerDAOInterface {
     private String DEFAULT_URI;
 
     public CustomerDAO(DbConnection DbConnection, String URI) {
-        DEFAULT_URI = URI;
         this.DbConnection = DbConnection;
-        if (customers.isEmpty()) {
-            // some dummy data for testing
-            Customer boris = new Customer();
-            boris.setUsername("boris");
-            boris.setFirstName("Boris");
-            boris.setLastName("McNorris");
-            boris.setPassword("guest");
-            boris.setShippingAddress("123 Some Street,\nNorth East Valley,\nDunedin");
-            boris.setEmailAddress("boris@example.net");
-
-            Customer doris = new Customer();
-            doris.setUsername("doris");
-            doris.setFirstName("Doris");
-            doris.setLastName("Dolores");
-            doris.setPassword("guest");
-            doris.setShippingAddress("321 Anywere Ave,\nSt Clair,\nDunedin");
-            doris.setEmailAddress("doris@example.net");
-
-            this.save(boris);
-            this.save(doris);
-        }
+        DEFAULT_URI = URI;
     }
+
+    /*@Override
+    public void save(Customer customer) {
+        String sql = "insert into Customer (CustomerID, Username, FirstName, LastName, Password, EmailAddress, ShippingAddress) values (?,?,?,?,?,?,?)";
+
+        try (
+                Connection dbCon = DbConnection.getConnection(DEFAULT_URI);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            stmt.setInt(1, customer.getCustomerID());
+            stmt.setString(2, customer.getUsername());
+            stmt.setString(3, customer.getFirstName());
+            stmt.setString(4, customer.getLastName());
+            stmt.setString(5, customer.getPassword());
+            stmt.setString(6, customer.getEmailAddress());
+            stmt.setString(7, customer.getShippingAddress());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }*/
 
     @Override
     public void save(Customer customer) {
