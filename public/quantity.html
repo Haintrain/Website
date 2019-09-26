@@ -4,13 +4,33 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="ShoppingApp">
     <head>
         <title>Testst</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
-    <body>
-        <div>Teststs</div>
+    <body ng-controller="CartController as cartCtrl" onload="cartCtrl.loadSelected()">
+        <div>How many would you like to buy?</div>
+        <div>
+            <table>
+            <tr>
+            <td align="center">ID: {{cartCtrl.selectedProduct.productID}}</td>  
+            <td align="center">Name: {{cartCtrl.selectedProduct.name}}</td>
+            <td align="center">Description: {{cartCtrl.selectedProduct.description}}</td>                  
+            <td align="center">Price: {{cartCtrl.selectedProduct.listPrice}}</td>
+            <td align="center">Quantity Available: {{cartCtrl.selectedProduct.quantityInStock}}</td>      
+            </tr>
+            </table>
+            <form ng-submit="cartCtrl.addToCart(quantity)" >
+                Quantity : <input name="quant" ng-model="quantity" required><br>
+                <button type="submit">Add to Cart</button>                
+            </form>
+        </div>
     </body>
 </html>
+

@@ -5,15 +5,9 @@
  */
 package dao;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.h2.jdbcx.JdbcConnectionPool;
-import shopping.Product;
 
 /**
  *
@@ -29,6 +23,7 @@ public class DbConnection {
     
     CustomerDAO custDao = new CustomerDAO(this, DEFAULT_URI);
     DAO dao = new DAO(this, DEFAULT_URI);
+    SaleDAO saleDao = new SaleDAO(this, DEFAULT_URI);
 
     public DbConnection() {  
     }
@@ -40,6 +35,11 @@ public class DbConnection {
     public CustomerDAO getCustomerDAO(){
         return custDao;
     }
+    
+    public SaleDAO getSaleDAO(){
+        return saleDao;
+    }
+    
     private static JdbcConnectionPool pool;
 
     public static Connection getConnection(String uri) {

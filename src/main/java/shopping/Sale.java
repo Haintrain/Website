@@ -16,11 +16,19 @@ import java.util.ArrayList;
  * @author hansp965
  */
 public class Sale {
-    private Integer saleID;
+    private String saleID;
     private LocalDate date;
     private String status;
     private Customer customer;
     private ArrayList<SaleItem> saleItems = new ArrayList<SaleItem>();
+      
+    public Sale(String saleID, LocalDate date, String status, Customer customer) {
+        this.saleID = saleID;
+        this.date = date;
+        this.status = status;
+        this.customer = customer;
+    }
+
     
     public BigDecimal getTotal(){
         return null;
@@ -30,7 +38,7 @@ public class Sale {
         
     }
 
-    public Integer getSaleID() {
+    public String getSaleID() {
         return saleID;
     }
 
@@ -50,7 +58,7 @@ public class Sale {
         return saleItems;
     }
 
-    public void setSaleID(Integer saleID) {
+    public void setSaleID(String saleID) {
         this.saleID = saleID;
     }
 

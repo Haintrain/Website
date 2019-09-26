@@ -5,7 +5,6 @@
  */
 package web;
 
-import dao.CustomerDAO;
 import dao.DbConnection;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
@@ -24,6 +23,7 @@ public class Server extends Jooby {
         use(new Gzon());
         use(new ProductModule(dao.getDAO()));
         use(new CustomerModule(dao.getCustomerDAO()));
+        use(new SaleModule(dao.getSaleDAO()));
         use(new AssetModule());
     }
 

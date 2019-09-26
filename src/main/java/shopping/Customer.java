@@ -1,5 +1,9 @@
 package shopping;
 
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,15 +15,36 @@ package shopping;
  * @author hansp965
  */
 public class Customer {
-    private Integer customerID;
+    @NotNull(message = "ID must be provided.")
+    @NotBlank(message = "ID must be provided.")
+    private String customerID;
+    
+    @NotNull(message = "Username must be provided.")
+    @NotBlank(message = "Username must be provided.")
+    @Length(min=2, message="Username must contain at least two characters.")
     private String username;
+      
     private String firstName;
     private String lastName;
+    
+    @NotNull(message = "Password must be provided.")
+    @NotBlank(message = "Password must be provided.")
+    @Length(min=7, message="Password must contain at least seven characters.")
     private String password;
     private String emailAddress;
     private String shippingAddress;
 
-    public Integer getCustomerID() {
+    public Customer(String customerID, String username, String firstName, String lastName, String password, String emailAddress, String shippingAddress) {
+        setCustomerID(customerID);
+        setUsername(username);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setPassword(password);
+        setEmailAddress(emailAddress);
+        setShippingAddress(shippingAddress);
+    }
+
+    public String getCustomerID() {
         return customerID;
     }
 
@@ -47,7 +72,7 @@ public class Customer {
         return shippingAddress;
     }
 
-    public void setCustomerID(Integer customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 

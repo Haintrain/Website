@@ -17,3 +17,29 @@ CREATE TABLE Product (
     QuantityInStock decimal not null,
     constraint Product_PK primary key (ProductID)
 );
+
+CREATE TABLE Customer (
+    CustomerID varchar(50) not null auto_increment,
+    UserName varchar(50) not null,
+    FirstName varchar(50) not null,
+    LastName varchar(50) not null,
+    Password varchar(50) not null,
+    EmailAddress varchar(50),
+    ShippingAddress varchar(50),
+    constraint Customer_PK primary key (CustomerID)
+);
+
+CREATE TABLE Sale (
+    SaleID varchar(50) not null auto_increment,
+    SaleDate date not null,
+    Status varchar(50),
+    CustomerID varchar(50) not null,
+    SaleItems varchar(50),
+    constraint Sale_PK primary key (SaleID)
+);
+
+CREATE TABLE SaleItem (
+    QuantityPurchased varchar(50) not null auto_increment,
+    SalePrice varchar(50) not null,
+    ProductID varchar(50),
+);

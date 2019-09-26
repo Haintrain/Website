@@ -15,7 +15,7 @@ public abstract interface CustomerDAOInterface {
 
     void save(Customer customer);
 
-    Customer getCustomer(String username);
+    Customer getCustomerFromUsername(String username);
 
     Boolean validateCredentials(String username, String password);
 }

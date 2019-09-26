@@ -19,11 +19,11 @@ import shopping.Product;
  * @author hansp965
  */
 public class DAO implements DAOInterface {
-    
+
     private final DbConnection DbConnection;
     private String DEFAULT_URI;
-    
-    public DAO(DbConnection DbConnection, String URI){
+
+    public DAO(DbConnection DbConnection, String URI) {
         this.DbConnection = DbConnection;
         DEFAULT_URI = URI;
     }
@@ -89,6 +89,7 @@ public class DAO implements DAOInterface {
 
     @Override
     public Collection<Product> getProductCategory(String c) {
+
         String sql = "select * from Product where Category = ?";
 
         try (
@@ -114,6 +115,7 @@ public class DAO implements DAOInterface {
         } catch (SQLException ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
+
     }
 
     @Override

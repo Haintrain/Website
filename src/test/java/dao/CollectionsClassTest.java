@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,11 +19,15 @@ import shopping.Product;
  */
 public class CollectionsClassTest {
     
+    private static DbConnection db = new DbConnection();
+    
     public CollectionsClassTest() {
-   
+        
     }
     
-    private CollectionsClass dao = new CollectionsClass();
+    //private CollectionsClass dao = new CollectionsClass();
+    private DAO dao = new DAO(null, 
+"jdbc:h2:mem:tests;INIT=runscript from 'src/main/resources/schema.sql'");
     private Product prodOne;
     private Product prodTwo;
     private Product prodThree;
