@@ -27,8 +27,8 @@ class ShoppingCart {
     }
 
     reconstruct(sessionData) {
-        for (let item of sessionData.saleItems) {
-            this.addItem(Object.assign(new SaleItem(), item));
+        for (let saleItem of sessionData.saleItems) {
+            this.addItem(Object.assign(new SaleItem(), saleItem));
         }
     }
 
@@ -36,8 +36,8 @@ class ShoppingCart {
         return this.saleItems;
     }
 
-    addItem(item) {
-        this.saleItems.push(item);
+    addItem(saleItem) {
+        this.saleItems.push(saleItem);
     }
 
     setCustomer(customer) {
@@ -134,14 +134,17 @@ module.controller('CartController', function (saleDAO, cart, $sessionStorage, $w
     this.items = cart.getItems();
     this.total = cart.getTotal();
     this.selectedProduct = $sessionStorage.selectedProduct;
+    
+    var item;
+    
 
     this.howMany = function (product) {
         $sessionStorage.selectedProduct = product;
         $window.location = 'quantity.html';
     };
 
-    this.addToCart = function (quantity) {
-        let item = new SaleItem(selectedProduct, quantity);
+    this.addToCart = function (quantity)  {
+        item = new SaleItem($sessionStorage.selectedProduct, quantity);
         cart.addItem(item);
         cart.reconstruct;
         $window.location = 'products.html';
