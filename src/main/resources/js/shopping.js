@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 "use strict";
-
 class SaleItem {
 
     constructor(product, quantityPurchased) {
@@ -94,10 +93,10 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
     this.products = productDAO.query();
     this.categories = categoryDAO.query();
 
-    this.selectAll = function() {
+    this.selectAll = function () {
         this.products = productDAO.query();
     };
-    
+
     this.selectCategory = function (selectedCat) {
         this.products = categoryDAO.query({"categories": selectedCat});
     };
@@ -109,13 +108,13 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
     let ctrl = this;
     this.signIn = function (username, password) {
         signInDAO.get({'username': username},
-            function (customer) {
-                $sessionStorage.customer = customer;
-                $window.location.href = '.';
-            },
-            function () {
-                ctrl.signInMessage = 'Sign in failed. Please try again.';
-            }
+                function (customer) {
+                    $sessionStorage.customer = customer;
+                    $window.location.href = '.';
+                },
+                function () {
+                    ctrl.signInMessage = 'Sign in failed. Please try again.';
+                }
         );
     };
 
@@ -136,22 +135,40 @@ module.controller('CartController', function (saleDAO, cart, $sessionStorage, $w
     this.total = cart.getTotal();
     this.selectedProduct = $sessionStorage.selectedProduct;
 
-    this.howMany = function(product){
+    this.howMany = function (product) {
         $sessionStorage.selectedProduct = product;
-        $window.location = 'quantity.html'; 
-    };  
-    
-    this.addToCart = function(quantity){
-        this.item = new SaleItem(selectedProduct, quantity);
+        $window.location = 'quantity.html';
+    };
+
+    this.addToCart = function (quantity) {
+        let item = new SaleItem(selectedProduct, quantity);
         cart.addItem(item);
         cart.reconstruct;
-        $window.location = 'products.html'; 
+        $window.location = 'products.html';
     };
-    
-    this.checkOut = function(){
+
+    this.checkOut = function () {
         cart.setCustomer($sessionStorage.customer);
         saleDAO.createSale(cart);
         delete $sessionStorage.cart;
         $window.location = 'thanks.html';
+    };
+});
+
+module.controller('PageController', function ($window) {
+    this.home = function () {
+        $window.location = 'index.html';
+    };
+    
+    this.products = function () {
+        $window.location = 'products.html';
+    };
+    
+    this.cart = function () {
+        $window.location = 'shoppingcart.html';
+    };
+    
+    this.out = function () {
+        $window.location = 'signin.html';
     };
 });

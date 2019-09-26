@@ -9,13 +9,22 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
-    <body>
+    <body ng-controller="CartController as cartCtrl">
         <div ng-controller="PageController as pageCtrl">
             <button ng-click="pageCtrl.home()">Home</button>
             <button ng-click="pageCtrl.products()">Products</button>
             <button ng-click="pageCtrl.cart()">Cart</button>
             <button ng-click="pageCtrl.out()">Sign Out</button>
+        </div>
+        <div>
+            <form ng-submit="cartCtrl.checkout()" >
+                <button type="submit">Checkout</button>                
+            </form>
         </div>
     </body>
 </html>

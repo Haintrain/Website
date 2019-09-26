@@ -14,17 +14,24 @@ and open the template in the editor.
         <script src="js/ngStorage.min.js"></script>
         <script src="js/shopping.js"></script>
     </head>
-    <body ng-controller="CartController as cartCtrl" onload="cartCtrl.loadSelected()">
+
+    <body ng-controller="CartController as cartCtrl">
+        <div ng-controller="PageController as pageCtrl">
+            <button ng-click="pageCtrl.home()">Home</button>
+            <button ng-click="pageCtrl.products()">Products</button>
+            <button ng-click="pageCtrl.cart()">Cart</button>
+            <button ng-click="pageCtrl.out()">Sign Out</button>
+        </div>
         <div>How many would you like to buy?</div>
         <div>
             <table>
-            <tr>
-            <td align="center">ID: {{cartCtrl.selectedProduct.productID}}</td>  
-            <td align="center">Name: {{cartCtrl.selectedProduct.name}}</td>
-            <td align="center">Description: {{cartCtrl.selectedProduct.description}}</td>                  
-            <td align="center">Price: {{cartCtrl.selectedProduct.listPrice}}</td>
-            <td align="center">Quantity Available: {{cartCtrl.selectedProduct.quantityInStock}}</td>      
-            </tr>
+                <tr>
+                    <td align="center">ID: {{cartCtrl.selectedProduct.productID}}</td>  
+                    <td align="center">Name: {{cartCtrl.selectedProduct.name}}</td>
+                    <td align="center">Description: {{cartCtrl.selectedProduct.description}}</td>                  
+                    <td align="center">Price: {{cartCtrl.selectedProduct.listPrice}}</td>
+                    <td align="center">Quantity Available: {{cartCtrl.selectedProduct.quantityInStock}}</td>      
+                </tr>
             </table>
             <form ng-submit="cartCtrl.addToCart(quantity)" >
                 Quantity : <input name="quant" ng-model="quantity" required><br>

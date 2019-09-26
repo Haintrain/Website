@@ -10,27 +10,32 @@
         <script src="js/shopping.js"></script>
     </head>
     <body ng-controller="ProductController as prodCtrl">
-        <div>Teststs</div>          
-        <div>
-        <button ng-click="prodCtrl.selectAll()">All</button>
-        <button ng-click="prodCtrl.selectCategory(cat)" ng-repeat="cat in prodCtrl.categories" >{{cat}}</button>
+        <div ng-controller="PageController as pageCtrl">
+            <button ng-click="pageCtrl.home()">Home</button>
+            <button ng-click="pageCtrl.products()">Products</button>
+            <button ng-click="pageCtrl.cart()">Cart</button>
+            <button ng-click="pageCtrl.out()">Sign Out</button>
         </div>
         <div>
-        <table style="width:100%" ng-controller="CartController as cartCtrl">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity in Stock</th>
-            </tr>
-            <tr ng-repeat="product in prodCtrl.products">
-                <td align="center">{{product.name}}</td>
-                <td align="center">{{product.description}}</td>                  
-                <td align="center">{{product.listPrice}}</td>
-                <td align="center">{{product.quantityInStock}}</td>  
-                <td><button ng-click="cartCtrl.howMany(product)">Buy</button></td>
-            </tr>
-        </table>
+            <button ng-click="prodCtrl.selectAll()">All</button>
+            <button ng-click="prodCtrl.selectCategory(cat)" ng-repeat="cat in prodCtrl.categories" >{{cat}}</button>
+        </div>
+        <div>
+            <table style="width:100%" ng-controller="CartController as cartCtrl">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity in Stock</th>
+                </tr>
+                <tr ng-repeat="product in prodCtrl.products">
+                    <td align="center">{{product.name}}</td>
+                    <td align="center">{{product.description}}</td>                  
+                    <td align="center">{{product.listPrice}}</td>
+                    <td align="center">{{product.quantityInStock}}</td>  
+                    <td><button ng-click="cartCtrl.howMany(product)">Buy</button></td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>

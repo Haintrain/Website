@@ -77,6 +77,9 @@ public class Sale {
     public void setSaleItems(ArrayList<SaleItem> saleItems) {
         this.saleItems = saleItems;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Sale{" + "saleID=" + saleID + ", date=" + date + ", status=" + status + ", customer=" + customer + ", saleItems=" + saleItems + '}';
+    }
 }
