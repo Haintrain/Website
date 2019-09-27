@@ -25,7 +25,9 @@ public class SaleModule extends Jooby {
             Sale sale = req.body().to(Sale.class);
             System.out.print(sale.toString());
             saleDao.save(sale);
+
             rsp.status(Status.CREATED);
-        });
+        }
+        );
     }
 }

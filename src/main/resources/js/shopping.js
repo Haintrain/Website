@@ -11,7 +11,7 @@ class SaleItem {
         if (product) {
             this.product = product;
             this.quantityPurchased = quantityPurchased;
-            this.salePrice = product.salePrice;
+            this.salePrice = product.listPrice;
         }
     }
 
@@ -55,6 +55,17 @@ class ShoppingCart {
 }
 
 var module = angular.module('ShoppingApp', ['ngResource', 'ngStorage']);
+
+module.config(function ($sessionStorageProvider, $httpProvider) {
+    // get the auth token from the session storage
+    let authToken = $sessionStorageProvider.get('authToken');
+
+    // does the auth token actually exist?
+    if (authToken) {
+        // add the token to all HTTP requests
+        $httpProvider.defaults.headers.common.Authorization = 'Basic ' + authToken;
+    }
+});
 
 module.factory('productDAO', function ($resource) {
     return $resource('/api/products/:id');
@@ -102,12 +113,17 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
     };
 });
 
-module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window) {
+module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window, $http) {
     this.signInMessage = "Please sign in to continue.";
-
     let ctrl = this;
     this.signIn = function (username, password) {
+        
+        let authToken = $window.btoa(username + ":" + password);
+        $sessionStorage.authToken = authToken;
+        $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
+        
         signInDAO.get({'username': username},
+        
                 function (customer) {
                     $sessionStorage.customer = customer;
                     $window.location.href = '.';
@@ -117,10 +133,11 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
                 }
         );
     };
-
+    
     this.registerCustomer = function (customer) {
         registerDAO.save(null, customer,
                 function () {
+                    delete $sessionStorage.customer;
                     $window.location = 'signin.html';
                 },
                 function (error) {
@@ -129,49 +146,49 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
         );
     };
 });
-
 module.controller('CartController', function (saleDAO, cart, $sessionStorage, $window) {
     this.items = cart.getItems();
     this.total = cart.getTotal();
     this.selectedProduct = $sessionStorage.selectedProduct;
-    
     var item;
-    
-
     this.howMany = function (product) {
         $sessionStorage.selectedProduct = product;
         $window.location = 'quantity.html';
     };
+    this.addToCart = function (quantity) {
+        if ($sessionStorage.selectedProduct.quantityInStock < quantity) {
+            alert("Not enough stock");
+        } else {
+            item = new SaleItem($sessionStorage.selectedProduct, quantity);
+            cart.addItem(item);
+            $sessionStorage.cart = cart;
+            $window.location = 'products.html';
+        }
 
-    this.addToCart = function (quantity)  {
-        item = new SaleItem($sessionStorage.selectedProduct, quantity);
-        cart.addItem(item);
-        cart.reconstruct;
-        $window.location = 'products.html';
     };
-
     this.checkOut = function () {
         cart.setCustomer($sessionStorage.customer);
-        saleDAO.createSale(cart);
+        saleDAO.save(cart);
         delete $sessionStorage.cart;
         $window.location = 'thanks.html';
     };
 });
-
-module.controller('PageController', function ($window) {
+module.controller('PageController', function ($sessionStorage, $window) {
     this.home = function () {
         $window.location = 'index.html';
     };
-    
     this.products = function () {
         $window.location = 'products.html';
     };
-    
     this.cart = function () {
         $window.location = 'shoppingcart.html';
     };
-    
     this.out = function () {
+        delete $sessionStorage.authToken;
+        delete $sessionStorage.customer;
         $window.location = 'signin.html';
+    };
+    this.create = function () {
+        $window.location = 'account.html';
     };
 });

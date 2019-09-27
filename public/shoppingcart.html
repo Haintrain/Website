@@ -6,9 +6,14 @@ and open the template in the editor.
 -->
 <html ng-app="ShoppingApp">
     <head>
-        <title>TODO supply a title</title>
+        <title>Cart</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src="js/ngStorage.min.js"></script>
@@ -22,9 +27,21 @@ and open the template in the editor.
             <button ng-click="pageCtrl.out()">Sign Out</button>
         </div>
         <div>
-            <form ng-submit="cartCtrl.checkout()" >
-                <button type="submit">Checkout</button>                
-            </form>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity Purchased</th>
+                </tr>
+                <tr ng-repeat="item in cartCtrl.items">
+                    <td align="center">{{item.product.name}}</td>
+                    <td align="center">{{item.quantityPurchased}}</td>
+                </tr>            
+            </table>
+            <h4>Total Price</h4>
+            <p>{{cartCtrl.total}}</p>
+        </div>
+        <div>
+            <button ng-click="cartCtrl.checkOut()">Checkout</button>                
         </div>
     </body>
 </html>

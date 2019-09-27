@@ -24,10 +24,9 @@ public class CustomerModule extends Jooby {
 
         get("/api/customers/:username", (req) -> {
             String id = req.param("username").value();
-            if(custDao.getCustomerFromUsername(id) != null){
+            if (custDao.getCustomerFromUsername(id) != null) {
                 return custDao.getCustomerFromUsername(id);
-            }
-            else{
+            } else {
                 return new Result().status(Status.NOT_FOUND);
             }
         });

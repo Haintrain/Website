@@ -31,10 +31,9 @@ CREATE TABLE Customer (
 
 CREATE TABLE Sale (
     SaleID varchar(50) not null auto_increment,
-    SaleDate date not null,
+    SaleDate timestamp not null,
     Status varchar(50),
     CustomerID varchar(50) not null,
-    SaleItems varchar(50),
     constraint Sale_PK primary key (SaleID)
 );
 
@@ -42,4 +41,6 @@ CREATE TABLE SaleItem (
     QuantityPurchased varchar(50) not null auto_increment,
     SalePrice varchar(50) not null,
     ProductID varchar(50),
+    SaleID varchar(50) not null,
+    FOREIGN KEY (SaleID) REFERENCES Sale(SaleID)
 );

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import shopping.Customer;
 
-public class CustomerDAO implements CustomerDAOInterface {
+public class CustomerDAO implements CustomerDAOInterface{
 
     private final DbConnection DbConnection;
     private String DEFAULT_URI;
@@ -66,17 +66,18 @@ public class CustomerDAO implements CustomerDAOInterface {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
-
+    
     @Override
     public Boolean validateCredentials(String username, String password) {
         String sql = "select * from Customer where Username = ?";
-
+//        System.out.print(username + " " + password);
+ 
         try (
                 Connection connection = DbConnection.getConnection(DEFAULT_URI);
                 PreparedStatement stmt = connection.prepareStatement(sql);) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-
+ 
             if (rs.next()) {
                 String pass = rs.getString("Password");
                 if(password.equals(pass)){
@@ -87,7 +88,7 @@ public class CustomerDAO implements CustomerDAOInterface {
                 }
             }
             else {
-                return null;
+                return false;
             }
         } catch (SQLException ex) {
             throw new DAOException(ex.getMessage(), ex);
