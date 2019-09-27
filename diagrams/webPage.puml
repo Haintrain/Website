@@ -1,0 +1,34 @@
+@startuml
+' use strict UML mode
+skinparam style strictuml
+
+actor "Customer" as customer
+participant "Web Page" as main
+participant "Product Controller" as controller <<dao>>
+participant "Module" as module <<module>>
+participant "Jooby" as jooby <<jooby>>
+participant "Product DAO" as dao <<product>>
+
+customer -> main : Opens Products Page
+main++
+main -> controller++ : prodCtrl.selectAll();
+
+
+controller-> module++ : productDAO.query();
+
+
+module -> jooby++ : $resource('/api/products/:id');
+
+
+jooby -> dao : dao.getProductList();
+dao -> jooby : return products;
+jooby -> module : Passes returns products to the module
+jooby--
+
+module -> controller-- : returns $resource('/api/products/:id');
+
+controller -> main : Gives access to products 
+
+
+@enduml
+
