@@ -28,7 +28,8 @@ jooby--
 module -> controller-- : returns $resource('/api/products/:id');
 
 controller -> main : Gives access to products 
+main -> customer : Displays products
 
+main--
 
 @enduml
-

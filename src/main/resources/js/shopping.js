@@ -173,9 +173,13 @@ module.controller('CartController', function (saleDAO, cart, $sessionStorage, $w
         $window.location = 'thanks.html';
     };
 });
+
 module.controller('PageController', function ($sessionStorage, $window) {
     this.home = function () {
         $window.location = 'index.html';
+    };
+    this.home2 = function () {
+        $window.location = 'index2.html';
     };
     this.products = function () {
         $window.location = 'products.html';
@@ -186,9 +190,12 @@ module.controller('PageController', function ($sessionStorage, $window) {
     this.out = function () {
         delete $sessionStorage.authToken;
         delete $sessionStorage.customer;
-        $window.location = 'signin.html';
+        $window.location = 'index2.html';
     };
     this.create = function () {
         $window.location = 'account.html';
+    };
+    this.in = function () {
+        $window.location = 'signin.html';
     };
 });

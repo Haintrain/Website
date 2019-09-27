@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html ng-app="ShoppingApp">
     <head>
-        <title>Sign In</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -45,23 +40,15 @@ and open the template in the editor.
                 color: white;
             }
         </style>
+        
     </head>
     <body style="padding:10px">
         <div class="topnav" ng-controller="PageController as pageCtrl">
             <a style="color:green" ng-click="pageCtrl.home2()">Home</a>
-            <a style="color:green" ng-click="pageCtrl.out()">Sign Out</a>
+            <a style="color:green" ng-click="pageCtrl.in()">Sign In</a>
         </div>
-        <div ng-controller="CustomerController as custCtrl">
-            <p>{{custCtrl.signInMessage}}</p>
-            <form ng-submit="custCtrl.signIn(username, password)">
-                Username : <input type="text" name="uname" ng-model="username" required><br>
-                Password : <input type="password" name="pass" ng-model="password" required><br>
-
-                <button type="submit">Sign In</button>
-            </form>
-            <div ng-controller="PageController as pageCtrl">
-                <button ng-click="pageCtrl.create()">Create Account</button>
-            </div>
+        <div>
+            <h1>Welcome</h1>
         </div>
     </body>
 </html>
